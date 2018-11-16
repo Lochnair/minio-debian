@@ -1,0 +1,34 @@
+#!/bin/sh -e
+
+if [ "$1" = configure ]; then
+    if ! getent passwd minio >/dev/null; then
+        adduser --quiet --system --group --no-create-home --home /var/lib/minio minio
+
+        openssl genrsa -out /etc/minio/certs/CAs/private.key 2048
+        openssl req -new -x509 -days 3650 \
+            -key /etc/minio/certs/private.key \
+            -out /etc/minio/certs/public.crt \
+            -subj "/C=US/ST=state/L=location/O=organization/CN=minio.local"
+
+        chown -R minio:minio /etc/minio
+        chown -R minio:minio /var/lib/minio
+    fi
+fi
+
+if [ "$1" = configure ]; then
+    cat <<EOF
+
+You have just installed MINIO
+-----------------------------
+
+Your access keys are stored in /var/lib/minio/.minio.sys/config/config.json
+You can access minio pointing your browser to port 9000.
+
+A self signed certificate has been generated in /etc/minio/certs/ together with its private key.
+If you want to use customized certificates, put them there.
+If you want to remove HTTPS, remove the two files.
+
+EOF
+fi
+
+#DEBHELPER#

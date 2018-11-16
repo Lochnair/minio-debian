@@ -1,0 +1,5 @@
+usr/bin
+var/lib/minio
+etc/minio
+etc/minio/certs
+/etc/minio/certs/CAs/

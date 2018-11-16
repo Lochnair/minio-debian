@@ -1,0 +1,15 @@
+Source: minio
+Section: devel
+Priority: extra
+Maintainer: Massimo Cetra <mcetra+github@gmail.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.8
+Homepage: https://www.minio.io/
+
+Package: minio
+Architecture: any
+Depends: libc6 (>= 2.3.2), openssl
+Description: High performance distributed object storage server
+    Minio is a high performance distributed object storage server, designed for
+    large-scale private cloud infrastructure. Minio is widely deployed across the
+    world with over 160M+ docker pulls. 

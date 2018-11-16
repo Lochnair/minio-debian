@@ -1,0 +1,3 @@
+MINIO_VOLUMES="/var/lib/minio"
+MINIO_OPTS="-C /etc/minio"
+

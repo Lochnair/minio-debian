@@ -1,0 +1,33 @@
+[Unit]
+Description=Minio
+Documentation=https://docs.minio.io/
+Wants=network-online.target
+After=network-online.target
+AssertFileIsExecutable=/usr/bin/minio
+
+[Service]
+WorkingDirectory=/usr/
+
+User=minio
+Group=minio
+
+PermissionsStartOnly=true
+
+Environment="MINIO_VOLUMES=/var/lib/minio"
+EnvironmentFile=-/etc/default/%p
+ExecStart=/usr/bin/minio $MINIO_OPTS server $MINIO_VOLUMES
+
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+
+StandardOutput=journal
+StandardError=inherit
+
+KillSignal=SIGTERM
+SendSIGKILL=no
+SuccessExitStatus=0
+LimitNOFILE=65536
+TimeoutStopSec=0
+
+[Install]
+WantedBy=multi-user.target
