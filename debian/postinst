@@ -4,7 +4,7 @@ if [ "$1" = configure ]; then
     if ! getent passwd minio >/dev/null; then
         adduser --quiet --system --group --no-create-home --home /var/lib/minio minio
 
-        openssl genrsa -out /etc/minio/certs/CAs/private.key 2048
+        openssl genrsa -out /etc/minio/certs/private.key 2048
         openssl req -new -x509 -days 3650 \
             -key /etc/minio/certs/private.key \
             -out /etc/minio/certs/public.crt \
