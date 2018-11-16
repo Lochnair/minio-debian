@@ -16,6 +16,6 @@ mv $FILE ./minio
 chmod 755 ./minio
 chown root:root ./minio
 
-dpkg-buildpackage -us -uc -b
+dpkg-buildpackage --ignore-builtin-builddeps -us -uc -b
 debian/rules clean
 rm -f minio
